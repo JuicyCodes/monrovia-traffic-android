@@ -1,0 +1,188 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b1326"><meta name="color-scheme" content="dark">
+<title>Monrovia Traffic Live</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@400,0..1&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b1326;--s1:#131b2e;--s2:#171f33;--s3:#222a3d;--tx:#dae2fd;--tx2:#94a3b8;--pri:#2563eb;--prl:#b4c5ff;--grn:#10b981;--amb:#f59e0b;--red:#ef4444;--ln:rgba(255,255,255,.08);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0;background:var(--bg);color:var(--tx);font:500 14px/20px 'Plus Jakarta Sans',system-ui,sans-serif}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+input,textarea{font:inherit;color:inherit}
+.m{font-family:'Material Symbols Outlined';font-size:22px;line-height:1;font-weight:400;vertical-align:middle;display:inline-block;overflow:hidden;width:1em}
+#app{max-width:480px;margin:0 auto;height:100%;display:flex;flex-direction:column;position:relative}
+header{display:flex;align-items:center;gap:12px;padding:10px 16px}
+header .t{flex:1}header b{font-size:16px;font-weight:800;display:block}
+.live{font-size:10px;font-weight:700;letter-spacing:.04em;color:var(--grn)}
+.logo{width:40px;height:40px;border-radius:8px;background:var(--s3);display:grid;place-items:center;color:var(--prl)}
+.av{width:40px;height:40px;border-radius:50%;background:var(--pri);display:grid;place-items:center;font-weight:800}
+main{flex:1;overflow-y:auto;padding:4px 16px 96px}
+nav{position:absolute;bottom:0;left:0;right:0;display:flex;background:var(--s1);border-top:1px solid var(--ln);padding:6px 4px calc(6px + env(safe-area-inset-bottom,0px))}
+nav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;font-weight:700;color:var(--tx2);padding:4px 0}
+nav button.on{color:var(--amb)}nav button.on .m{font-variation-settings:'FILL' 1}
+.card{background:var(--s1);border:1px solid var(--ln);border-radius:16px;padding:16px;margin-bottom:12px}
+.fc{border-left:4px solid var(--c,var(--pri));padding-left:12px}
+.row{display:flex;align-items:center;gap:8px}.sp{justify-content:space-between}.g{flex:1;min-width:0}
+.sm{font-size:12px;color:var(--tx2)}.h2{font-size:18px;font-weight:700;margin:20px 0 10px;display:flex;align-items:center;gap:8px}
+.pill{display:inline-block;border-radius:99px;padding:3px 10px;font-size:11px;font-weight:700;background:rgba(255,255,255,.08);margin:2px 4px 2px 0;white-space:nowrap}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:4px 0 12px;scrollbar-width:none}
+.chip{border-radius:99px;padding:8px 14px;background:var(--s2);border:1px solid var(--ln);font-weight:700;white-space:nowrap;font-size:13px}
+.chip.on{background:var(--prl);color:#002a78}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:48px;border-radius:8px;background:var(--pri);color:#fff;font-weight:700;font-size:15px}
+.btn:active{transform:scale(.98)}.btn.off{opacity:.45}
+.b2{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;min-height:40px;padding:0 14px;font-weight:700;font-size:13px;display:inline-flex;align-items:center;gap:6px}
+.b2.on{background:rgba(16,185,129,.2);border-color:var(--grn);color:var(--grn)}
+.inp{width:100%;min-height:48px;background:var(--s2);border:1.5px solid var(--ln);border-radius:12px;padding:0 14px;outline:0}
+.inp:focus{border-color:var(--pri)}textarea.inp{padding:12px;min-height:80px;resize:none}
+.tog{width:50px;height:28px;border-radius:99px;background:var(--s3);position:relative;flex:none;transition:.2s}
+.tog:after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:.2s}
+.tog.on{background:var(--grn)}.tog.on:after{left:25px}
+.ck{width:24px;height:24px;border-radius:6px;border:2px solid var(--tx2);display:grid;place-items:center;flex:none}
+.ck.on{background:var(--pri);border-color:var(--pri)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tile{background:var(--s2);border:1px solid var(--ln);border-radius:16px;padding:14px;text-align:left;display:block}
+.tile b{display:block;margin-top:8px}.tile.on{background:#930009;border-color:var(--red)}
+.seg{display:flex;background:var(--s1);border-radius:12px;padding:4px;margin-bottom:12px}
+.seg button{flex:1;padding:12px;border-radius:8px;font-weight:700;color:var(--tx2)}.seg .on{background:var(--s3);color:var(--tx)}
+.bar{height:8px;border-radius:9px;display:flex;overflow:hidden;margin:8px 0}
+.fab{position:absolute;right:16px;bottom:calc(84px + env(safe-area-inset-bottom,0px));background:var(--pri);border-radius:99px;padding:14px 20px;font-weight:700;display:flex;gap:8px;align-items:center;box-shadow:0 10px 25px -5px rgba(0,0,0,.5)}
+#toast{position:absolute;left:16px;right:16px;bottom:calc(90px + env(safe-area-inset-bottom,0px));background:#283044;padding:12px 16px;border-radius:12px;font-weight:600;opacity:0;pointer-events:none;transition:.25s;text-align:center}
+#toast.show{opacity:1}
+.map{background:#0f172a;border-radius:16px;overflow:hidden;border:1px solid var(--ln);margin-bottom:12px}
+.map svg{display:block;width:100%}.map path.c{cursor:pointer}
+.wave{flex:1;height:28px;background:repeating-linear-gradient(90deg,var(--grn) 0 2px,transparent 2px 5px);opacity:.6;border-radius:4px}
+.hero{text-align:center;padding:20px 0}.hero .logo{width:84px;height:84px;margin:0 auto 12px;border-radius:20px}
+ .demo-notice{background:#462e0a;color:#ffe6a0;padding:8px 12px;text-align:center;font-size:11px;line-height:1.4;font-weight:750;border-bottom:1px solid #946315}
+</style></head><body><div id="app"><div id="root"></div><div id="toast"></div></div>
+<script>
+const $=s=>document.querySelector(s);
+const ic=n=>`<span class="m">${n}</span>`;
+const COL={red:'#ef4444',amb:'#f59e0b',grn:'#10b981',pri:'#2563eb'};
+const ROUTES=[['Paynesville ↔ Downtown Monrovia','Tubman Blvd & Red Light • Morning/Evening','alt_route'],['Bushrod Island & Freeport ↔ Sinkor','Somalia Drive & Waterside Viaduct','directions_boat'],['ELWA Highway ↔ Central Broad Street','Congo Town, Oldest Congo Road & Ministers','traffic']];
+const TYPES=[['Gridlock / Standstill','Dead stop, crawling','traffic','red'],['Accident','Fender bender, crash','car_crash','amb'],['VIP Convoy','Sirens, lane blocked','local_police','pri'],['Road Damage','Deep hole, trench','warning','amb'],['Police Checkpoint','Document checking','shield','grn'],['Flood Hazard','Deep water standing','flood','pri']];
+const LM=['Red Light Market','ELWA Junction','Broad St / Crown Hill','Freeport Gate','SKD Boulevard'];
+const COR=[
+{n:'Tubman Blvd (Sinker to Central)'.replace('Sinker','Sinkor'),d:'Heavy Congestion • +32 min (VIP Motorcade)',c:'red',p:'M30 170 Q120 120 170 95 T300 40'},
+{n:'Somalia Drive (Freeport to Red Light)',d:'Moderate Flow • +14 min delay',c:'amb',p:'M20 60 Q110 90 170 95 T330 150'},
+{n:'Broad Street & Waterside',d:'Moving Freely • No major standstills',c:'grn',p:'M60 30 Q100 70 170 95 T250 190'}];
+const PULSE=[['Paynesville → Downtown Monrovia','54 min (+18m)','Via Tubman Blvd','Chokepoint @ 12th Street','red',[35,25,40]],['Freeport → Sinkor / Oldest Congo Town','26 min (+5m)','Via Gabriel Tucker Bridge','Pacing Normal','amb',[60,40,0]],['Broad Street & Waterside Market','Clear','Moving Freely','','grn',[100,0,0]]];
+const FEED0=[
+{id:1,src:'Facebook Groups',by:'Monrovia Traffic Watch',sub:'Facebook Group • Verified Source',ago:'12m ago',tag:'Standstill Gridlock',c:'red',loc:['Freeport','Stockton Creek','Logan Town'],txt:'Huge fuel tanker breakdown near Freeport entrance causing standstill from Stockton Creek Bridge back to Logan Town. Police currently diverting small cars.',likes:112,cm:48},
+{id:2,src:'Google',by:'Google Traffic Real-time Sensor',sub:'Automated Telemetry Feed',ago:'3m ago',tag:'Severe Slowdown (+25m delay)',c:'amb',loc:['Tubman Blvd','12th Street Intersection'],txt:'Severe slowdown detected on Tubman Blvd at 12th Street intersection. Speeds down to 6 km/h. Expected delay: 25 minutes.',likes:0,sensor:1,cor:1},
+{id:3,src:'Community',by:'Verified Taxi Commuter @Ta…',sub:'ELWA Corridor Fleet Volunteer',ago:'18m ago',tag:'Steadily Moving',c:'grn',loc:['ELWA Junction Intersection'],txt:'“ELWA Junction traffic light out, LNP officer now directing manually. Queue moving steadily now.”',likes:64,voice:1,conf:'LNP Officer On-Site Confirmed'},
+{id:4,src:'Official',by:'Liberia National Police',sub:'Official Traffic Division Bulletin',ago:'34m ago',tag:'Night Maintenance Advisory',c:'pri',loc:['SKD Boulevard Junction'],txt:'Advisory: Road maintenance works beginning at SKD Boulevard junction tonight from 8:00 PM. Traffic officers will be present to manage alternating single-lane passage. Motorists heading to Paynesville are advised to use Tubman Blvd where feasible.',likes:240,conf:'Official Dispatch #LNP-704'},
+{id:5,src:'Radio',by:'ELBC / OK FM Commuter Radio',sub:'Broadcast Desk Live Summary',ago:'46m ago',tag:'All Clear Corridor',c:'grn',loc:['Somalia Drive / Japan Freeway'],txt:'Radio traffic update: Somalia Drive (Japan Freeway) from Gabriel Tucker Bridge toward Red Light is flowing exceptionally smoothly with no stalled trucks or bottlenecks. Recommended alternative route for east-bound freight.',likes:88,conf:'Transcribed via FM Alert Desk'}];
+
+let S={user:null,routes:[0,1],hp:true,tab:'map',src:'All Sources',q:'',cor:0,feed:FEED0,mine:0,
+ otp:0,phone:'',loginTab:0,voted:{},play:null,rep:{type:null,lm:0,dir:0,memo:0,photo:'',note:'',share:1}};
+try{const d=JSON.parse(localStorage.getItem('mtl')||'null');if(d){Object.assign(S,d.s||{});}}catch(e){}
+const save=()=>{try{localStorage.setItem('mtl',JSON.stringify({s:{user:S.user,routes:S.routes,hp:S.hp,mine:S.mine,feed:S.feed,voted:S.voted}}))}catch(e){}};
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('show'),2200)}
+const hdr=()=>`<header><div class="logo">${ic('traffic')}</div><div class="t"><b>Monrovia Traffic</b><span class="live">● LIVE MONROVIA RADAR: ONLINE</span></div><button data-a="bell" aria-label="Alerts">${ic('notifications')}</button><button class="av" data-a="tab:me">${(S.user||'M')[0]=='+'?'M':'M'}</button></header>`;
+
+function login(){
+ const sel=S.routes.length;
+ return `<main style="padding-bottom:24px"><div class="hero"><div class="logo">${ic('traffic')}</div><h1 style="margin:0;font-size:28px;font-weight:800">Monrovia Traffic Live</h1><div class="pill" style="color:var(--grn);margin-top:8px">LIVE ARTERIAL MESH</div><p class="sm">Real-Time Traffic, Road Hazards &amp; Commuter Intel across Greater Monrovia</p></div>
+ <div class="seg"><button class="${S.loginTab?'':'on'}" data-a="lt:0">Mobile Number</button><button class="${S.loginTab?'on':''}" data-a="lt:1">One-Tap Social</button></div>
+ <div class="card">${S.loginTab?`<button class="btn" data-a="social:Google" style="margin-bottom:10px">Continue with Google</button><button class="btn" data-a="social:Facebook" style="background:#1877f2">Continue with Facebook</button>`:
+ S.otp?`<div class="sm" style="margin-bottom:8px">Enter the 6-digit code sent to +231 ${S.phone}</div><input class="inp" id="otp" inputmode="numeric" maxlength="6" placeholder="000000" style="letter-spacing:.4em;text-align:center;font-size:20px;margin-bottom:8px"><div class="sm" style="margin-bottom:12px;color:var(--amb)">Demo mode: use code 123456</div><button class="btn" data-a="verify">Verify &amp; Continue</button><button class="sm" data-a="back" style="margin-top:12px;width:100%">Change number</button>`:
+ `<b>Liberia Mobile Number</b><div class="row" style="margin:10px 0"><div class="inp row" style="width:96px;flex:none">🇱🇷 +231</div><input class="inp" id="ph" inputmode="tel" placeholder="77 000 000 / 88…" maxlength="11" value="${S.phone}"></div><div class="sm" style="margin-bottom:12px">Instant code verification via SMS. No password needed.</div><button class="btn" data-a="otp">Send SMS OTP ${ic('arrow_forward')}</button>`}</div>
+ ${rt()}<button class="btn ${S.user?'':'off'}" data-a="launch">${ic('explore')} Save Commute &amp; Launch Map</button>
+ <p class="sm" style="text-align:center;margin-top:16px">Zero background tracking when app is closed<br>Community-powered traffic intelligence for Monrovia roads.</p></main>`}
+function rt(){return `<div class="h2" style="margin-top:8px">Daily Route Alerts</div><div class="sm" style="margin:-6px 0 10px">Tap corridors to follow real-time bottlenecks</div>`+ROUTES.map((r,i)=>`<button class="card row" style="width:100%;text-align:left;padding:12px" data-a="rt:${i}"><div class="logo" style="color:var(--grn)">${ic(r[2])}</div><div class="g"><b>${r[0]}</b><div class="sm">${r[1]}</div></div><div class="ck ${S.routes.includes(i)?'on':''}">${S.routes.includes(i)?ic('check'):''}</div></button>`).join('')+`<button class="card row" style="width:100%;text-align:left" data-a="hp"><div class="g"><b>High Priority Notifications Only</b><div class="sm">Severe flash floods, VIP convoys &amp; bridge closures</div></div><div class="tog ${S.hp?'on':''}"></div></button>`}
+
+function pulse(){return `<div class="card"><div class="row sp"><div class="h2" style="margin:0">${ic('speed')} Corridor Quick Pulse</div><span class="pill" style="color:var(--prl)">Live Sync</span></div><div style="margin-top:12px">${PULSE.map(p=>`<div class="card" style="background:var(--s2);margin-bottom:8px;padding:12px"><div class="row sp"><b class="g">${p[0]}</b><b style="color:${COLOR(p[4])}">${p[1]}</b></div><div class="bar">${p[5].map((w,i)=>w?`<i style="width:${w}%;background:${['#10b981','#f59e0b','#fca5a5'][i]}"></i>`:'').join('')}</div><div class="row sp sm"><span>${p[2]}</span><b style="color:${COLOR(p[4])}">${p[3]}</b></div></div>`).join('')}</div></div>`}
+const COLOR=k=>COL[k];
+function mapTab(){
+ const q=S.q.toLowerCase(),list=COR.map((c,i)=>[c,i]).filter(([c])=>!q||c.n.toLowerCase().includes(q)||c.d.toLowerCase().includes(q));
+ return `<main><div class="row" style="margin:4px 0 12px"><input class="inp" id="q" placeholder="Search street, corridor, or junction…" value="${S.q}" style="flex:1"><button class="b2" data-a="mic" style="min-height:48px">${ic('mic')}</button></div>
+ <div class="chips"><button class="chip ${S.q?'':'on'}" data-a="q:">All Chokepoints</button><button class="chip" data-a="q:Tubman">Tubman Blvd</button><button class="chip" data-a="q:Somalia">Somalia Drive</button><button class="chip" data-a="q:Broad">Broad Street</button></div>
+ <div class="map"><svg viewBox="0 0 360 220"><rect width="360" height="220" fill="#0f172a"/><path d="M0 120 Q90 100 170 140 T360 150 V220 H0Z" fill="#1e3a5f" opacity=".5"/><path d="M0 150 Q100 130 180 160 T360 175" stroke="#2b5a8a" stroke-width="10" fill="none" opacity=".4"/>
+ ${['Bushrod Island|60|30','Monrovia|150|85','Sinkor|230|140','Paynesville|300|50'].map(t=>{t=t.split('|');return `<text x="${t[1]}" y="${t[2]}" fill="#475569" font-size="10" font-weight="700">${t[0]}</text>`}).join('')}
+ ${COR.map((c,i)=>`<path class="c" data-a="cor:${i}" d="${c.p}" fill="none" stroke="${COL[c.c]}" stroke-width="${S.cor==i?9:5}" stroke-linecap="round" opacity="${list.some(l=>l[1]==i)?1:.15}" stroke-dasharray="${c.c=='grn'?'2 8':''}"/>`).join('')}<circle cx="170" cy="95" r="7" fill="#fff" stroke="#2563eb" stroke-width="3"/></svg>
+ <div style="padding:10px">${list.length?list.map(([c,i])=>`<button data-a="cor:${i}" class="card row" style="width:100%;text-align:left;margin:0 0 8px;padding:10px 12px;border-color:${S.cor==i?COL[c.c]:'var(--ln)'}"><div class="g"><b>${c.n}</b><div class="sm" style="color:${COL[c.c]}">${c.d}</div></div>${ic('chevron_right')}</button>`).join(''):'<div class="sm" style="padding:8px">No corridors match “'+S.q+'”.</div>'}
+ <div class="row" style="gap:8px"><button class="b2 g" data-a="rec" style="justify-content:center">${ic('my_location')} Recenter</button><button class="b2 g" data-a="tab:report" style="justify-content:center;background:var(--amb);color:#472a00;border:0">${ic('notification_important')} Report Hazard</button><button class="b2 g" data-a="layers" style="justify-content:center">${ic('layers')} Layers</button></div></div></div>
+ ${pulse()}
+ <div class="card"><div class="row"><div class="logo" style="background:#93000a">${ic('local_police')}</div><div class="g"><b>St. Paul River Bridge <span class="pill">VIP Convoy</span></b><div class="sm">Verified by ${18+(S.voted.x||0)} drivers • 4 mins ago</div></div></div><p style="font-size:15px">Inbound lane stalled near Bushrod checkpoint due to escorted convoy and rain drain overflow. Divert via Caldwell road if driving small sedans.</p><div class="row"><button class="b2 ${S.voted.x?'on':''}" data-a="still:x">${ic('thumb_up')} Still There <span class="pill">${34+(S.voted.x||0)}</span></button><button class="b2" data-a="clear:x">${ic('check')} Cleared</button><button class="b2" data-a="alt">Alternative Route ${ic('alt_route')}</button></div></div>
+ <div class="card"><b style="font-size:18px">Verified Watchers on Patrol</b><p class="sm" style="margin-bottom:0"><span style="color:var(--grn)">3 active in Sinkor.</span> Broadcasting real-time chokepoint updates for <b>11,400+</b> Monrovia commuters today.</p></div></main>`}
+
+function feedTab(){
+ const cats=['All Sources','Facebook Groups','Google','Community','Official','Radio'];
+ const items=S.feed.filter(f=>S.src=='All Sources'||f.src==S.src);
+ return `<main><div class="card row"><div class="logo" style="color:var(--grn)">${ic('sensors')}</div><div class="g"><div class="sm" style="color:var(--grn);font-weight:700">● MULTI-SOURCE SYNCED</div><b style="font-size:16px">${S.feed.length} Updates in past hour</b></div><div style="text-align:right"><div class="sm">Crowd Trust</div><b style="color:var(--grn);font-size:18px">94%</b></div></div>
+ <div class="chips">${cats.map(c=>`<button class="chip ${S.src==c?'on':''}" data-a="src:${c}">${c}${c=='All Sources'?' '+S.feed.length:''}</button>`).join('')}</div>
+ ${items.length?items.map(card).join(''):'<div class="card sm">No updates from this source yet.</div>'}</main><button class="fab" data-a="tab:report">${ic('notification_important')} Quick Report</button>`}
+function card(f){const v=S.voted[f.id]||0,c=COL[f.c];
+ return `<div class="card fc" style="--c:${c}"><div class="row"><div class="logo" style="color:${c}">${ic(f.mine?'person':f.sensor?'speed':f.voice?'directions_car':f.src=='Official'?'shield':f.src=='Radio'?'podcasts':'groups')}</div><div class="g"><b>${f.by}</b><div class="sm">${f.sub}</div></div><span class="pill">${f.ago}</span></div>
+ <div style="margin:10px 0 4px"><span class="pill" style="color:${c};background:${c}22">${f.tag}</span>${f.loc.map(l=>`<span class="pill">${l}</span>`).join('')}</div><p style="font-size:15px;margin:8px 0">${f.txt}</p>
+ ${f.voice?`<button class="card row" data-a="play:${f.id}" style="width:100%;margin:8px 0;background:var(--s2)"><span class="logo" style="background:var(--grn);color:#003824;border-radius:50%">${ic(S.play==f.id?'pause':'play_arrow')}</span><span class="wave" ${S.play==f.id?'style="opacity:1"':''}></span><span class="sm">${S.play==f.id?'Playing…':'0:24'}</span></button>`:''}
+ ${f.sensor?`<div class="card row" style="background:var(--s2);padding:10px"><div class="logo">6</div><div class="g sm">Live Speed: 6 km/h<br>Normal flow: 38 km/h</div><b style="color:var(--amb)">Bottleneck</b></div><div class="row sm">Corroborate: <button class="b2 ${S.voted.s=='j'?'on':''}" data-a="still:s">Still Jammed</button><button class="b2" data-a="clear:s">Cleared</button></div>`:`<div class="row sp" style="margin-top:8px"><div class="row"><button class="b2 ${v==1?'on':''}" data-a="like:${f.id}">${ic('thumb_up')} ${f.likes+(v==1?1:0)}</button><button class="b2 ${v==-1?'on':''}" data-a="dis:${f.id}" style="${v==-1?'':'padding:0 10px'}">${ic('thumb_down')}</button></div>${f.cm?`<span class="sm">${ic('chat_bubble')} ${f.cm} comments</span><button class="sm" data-a="share">${ic('share')} Broadcast</button>`:`<span class="sm" style="color:var(--grn)">${f.conf||''}</span>`}</div>`}</div>`}
+
+function reportTab(){const r=S.rep;
+ return `<main><div class="card row" style="background:var(--s2)"><div class="logo" style="color:var(--amb)">${ic('campaign')}</div><div class="g"><div class="sm" style="color:var(--grn);font-weight:700">INSTANT BROADCAST ●</div>Help fellow Monrovia drivers! Your report broadcasts immediately across Facebook &amp; app feeds.</div></div>
+ <div class="h2">① Select Incident Type <span class="sm" style="margin-left:auto">REQUIRED</span></div><div class="grid">${TYPES.map((t,i)=>`<button class="tile ${r.type===i?'on':''}" data-a="ty:${i}"><span style="color:${r.type===i?'#fff':COL[t[3]]}">${ic(t[2])}</span><b>${t[0]}</b><span class="sm" style="${r.type===i?'color:#fcc':''}">${t[1]}</span></button>`).join('')}</div>
+ <div class="h2">② Location &amp; Landmark</div><div class="card"><div class="row"><span>${ic('navigation')}</span><div class="g"><div class="sm">Current Monrovia Arterial</div><b>Near ${LM[r.lm]}</b></div><button class="b2" data-a="lmn">Change</button></div><div class="sm" style="margin:10px 0 4px">Quick Monrovia Landmarks:</div>${LM.map((l,i)=>`<button class="chip ${r.lm==i?'on':''}" data-a="lm:${i}" style="margin:0 6px 6px 0">${l}</button>`).join('')}</div>
+ <div class="h2">③ Direction of Flow</div><div class="seg"><button class="${r.dir?'':'on'}" data-a="dir:0">↖ Inbound<br><span class="sm">Downtown Monrovia</span></button><button class="${r.dir?'on':''}" data-a="dir:1">↘ Outbound<br><span class="sm">Paynesville / Robertsfield</span></button></div>
+ <div class="h2">④ Voice Note &amp; Visuals <span class="sm" style="margin-left:auto">OPTIONAL</span></div><div class="grid"><button class="tile ${r.memo?'on':''}" data-a="memo" style="${r.memo?'background:rgba(16,185,129,.15);border-color:var(--grn)':''}"><span style="color:var(--amb)">${ic(r.memo==1?'stop_circle':'mic')}</span><b>${r.memo==2?'Memo saved ✓':r.memo==1?'Recording… tap to stop':'10s Voice Memo'}</b><span class="sm">Tap to speak safely</span></button><label class="tile" style="${r.photo?'border-color:var(--grn)':''}"><span style="color:var(--prl)">${ic('add_a_photo')}</span><b>${r.photo?'Photo added ✓':'Snap Photo'}</b><span class="sm">${r.photo?r.photo.slice(0,22):'Proof / clear view'}</span><input type="file" accept="image/*" capture="environment" hidden data-ph></label></div>
+ <div class="sm" style="margin:14px 0 6px;font-weight:700">Brief Incident Note</div><textarea class="inp" id="note" placeholder="e.g. Broken down yellow kehkeh blocking the center lane, traffic diverting slowly…">${r.note}</textarea>
+ <button class="card row" data-a="sh" style="width:100%;text-align:left;margin-top:12px"><div class="logo" style="background:var(--pri)">${ic('share')}</div><div class="g"><b>Monrovia FB Traffic Group</b><div class="sm">Auto-share to 42,000+ local commuters</div></div><div class="tog ${r.share?'on':''}"></div></button>
+ <button class="btn ${r.type===null?'off':''}" data-a="send">${ic('cell_tower')} Broadcast Live Alert</button><div class="sm" style="text-align:center;margin-top:10px;color:var(--grn)">Trusted Reporter ID: #LR-9942</div></main>`}
+
+function meTab(){const ph=S.user||'';
+ return `<main><div class="card row"><div class="av" style="width:56px;height:56px;font-size:22px">M</div><div class="g"><b style="font-size:16px">${ph}</b><div class="sm">Trusted Reporter #LR-9942</div></div></div>
+ <div class="grid" style="margin-bottom:8px"><div class="card" style="text-align:center;margin:0"><b style="font-size:24px">${S.mine}</b><div class="sm">Reports sent</div></div><div class="card" style="text-align:center;margin:0"><b style="font-size:24px;color:var(--grn)">94%</b><div class="sm">Crowd trust</div></div></div>${rt()}
+ <button class="b2" data-a="out" style="width:100%;justify-content:center;color:var(--red);margin-top:8px">${ic('logout')} Sign out</button></main>`}
+
+function render(keepFocus){
+ const ae=document.activeElement&&document.activeElement.id;
+ let h;
+ if(!S.user||S.tab=='login'){h=login()}
+ else{h=hdr()+({map:mapTab,feed:feedTab,report:reportTab,me:meTab}[S.tab]||mapTab)()+`<nav>${[['map','Live Map','explore'],['feed','Updates Feed','newspaper'],['report','Report Alert','warning'],['me','Profile & Alerts','manage_accounts']].map(t=>`<button class="${S.tab==t[0]?'on':''}" data-a="tab:${t[0]}">${ic(t[2])}${t[1]}</button>`).join('')}</nav>`}
+ h='<div class="demo-notice">DEMO ONLY — Sample traffic data, not live. Do not use for road navigation.</div>'+h;
+ const m=$('#root');const sy=m.querySelector('main')?m.querySelector('main').scrollTop:0;m.innerHTML=h;m.style.cssText='display:flex;flex-direction:column;height:100%';
+ if(keepFocus){const mm=m.querySelector('main');if(mm)mm.scrollTop=sy;if(ae){const e=document.getElementById(ae);if(e){e.focus();try{e.setSelectionRange(e.value.length,e.value.length)}catch(x){}}}}
+ else{const mm=m.querySelector('main');if(mm)mm.scrollTop=0}
+}
+document.addEventListener('input',e=>{
+ if(e.target.id=='q'){S.q=e.target.value;render(1)}
+ if(e.target.id=='note')S.rep.note=e.target.value;
+ if(e.target.id=='ph')S.phone=e.target.value.replace(/[^\d ]/g,'');
+});
+document.addEventListener('change',e=>{if(e.target.dataset.ph!==undefined&&e.target.files[0]){S.rep.photo=e.target.files[0].name;render(1)}});
+let rec;
+document.addEventListener('click',e=>{
+ const b=e.target.closest('[data-a]');if(!b)return;
+ const [a,v]=[b.dataset.a.split(':')[0],b.dataset.a.split(':').slice(1).join(':')],keep=1;
+ const go=k=>{render(k);save()};
+ const A={
+  tab:()=>{S.tab=v;go()},lt:()=>{S.loginTab=+v;go()},
+  otp:()=>{const p=($('#ph').value||'').replace(/\D/g,'');if(p.length<7)return toast('Enter a valid Liberian number');S.phone=p;S.otp=1;go()},
+  back:()=>{S.otp=0;go()},
+  verify:()=>{if(($('#otp').value||'')=='123456'){S.user='+231 '+S.phone;S.otp=0;toast('Number verified');go()}else toast('Wrong code. Demo code is 123456')},
+  social:()=>{S.user=v+' account';toast('Signed in with '+v);go()},
+  rt:()=>{const i=+v,k=S.routes.indexOf(i);k<0?S.routes.push(i):S.routes.splice(k,1);go(keep)},
+  hp:()=>{S.hp=!S.hp;go(keep)},
+  launch:()=>{if(!S.user)return toast('Verify your number first');S.tab='map';toast(S.routes.length+' route(s) saved');go()},
+  out:()=>{S.user=null;S.tab='login';S.phone='';go()},
+  q:()=>{S.q=v;go(keep)},cor:()=>{S.cor=+v;go(keep)},
+  mic:()=>{const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR)return toast('Voice search not supported on this browser');const r=new SR();r.onresult=x=>{S.q=x.results[0][0].transcript;render(1)};r.start();toast('Listening…')},
+  rec:()=>toast('Map recentered on Monrovia'),layers:()=>toast('Layers: Traffic • Incidents • Rain'),bell:()=>toast(S.hp?'High-priority alerts only':'All alerts on'),
+  alt:()=>toast('Alternative: Caldwell Road via Bushrod'),share:()=>toast('Broadcast link copied'),
+  still:()=>{S.voted[v]=v=='s'?'j':1;toast('Thanks — confirmed still there');go(keep)},
+  clear:()=>{S.voted[v]=0;toast('Marked as cleared');go(keep)},
+  src:()=>{S.src=v;go(keep)},
+  like:()=>{S.voted[v]=S.voted[v]==1?0:1;go(keep)},dis:()=>{S.voted[v]=S.voted[v]==-1?0:-1;go(keep)},
+  play:()=>{S.play=S.play==v?null:+v;clearTimeout(S.pt);if(S.play)S.pt=setTimeout(()=>{S.play=null;render(1)},24000);go(keep)},
+  ty:()=>{S.rep.type=+v;go(keep)},lm:()=>{S.rep.lm=+v;go(keep)},lmn:()=>{S.rep.lm=(S.rep.lm+1)%LM.length;go(keep)},dir:()=>{S.rep.dir=+v;go(keep)},
+  sh:()=>{S.rep.share=!S.rep.share;go(keep)},
+  memo:()=>{const r=S.rep;if(r.memo==1){clearTimeout(rec);r.memo=2}else{r.memo=1;rec=setTimeout(()=>{S.rep.memo=2;render(1)},10000)}go(keep)},
+  send:()=>{const r=S.rep;if(r.type===null)return toast('Select an incident type first');const t=TYPES[r.type];
+   S.feed.unshift({id:Date.now(),mine:1,src:'Community',by:'You • Trusted Reporter #LR-9942',sub:'Your live report'+(r.share?' • Shared to FB group':''),ago:'just now',tag:t[0],c:t[3],loc:[LM[r.lm],r.dir?'Outbound':'Inbound'],txt:r.note||t[1]+' reported near '+LM[r.lm]+'.',likes:0,voice:r.memo==2?1:0});
+   S.mine++;S.rep={type:null,lm:0,dir:0,memo:0,photo:'',note:'',share:1};S.tab='feed';S.src='All Sources';toast('Alert broadcast to Monrovia drivers');go()}
+ };
+ if(A[a])A[a]();
+});
+if(!S.user)S.tab='login';render();
+</script></body></html>
