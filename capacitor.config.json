@@ -1,0 +1,11 @@
+{
+  "appId": "com.monrovia.trafficlive",
+  "appName": "Monrovia Traffic",
+  "webDir": "www",
+  "backgroundColor": "#0b1326",
+  "server": {
+    "url": "https://monrovia-traffic-live-990990560897.europe-west1.run.app",
+    "cleartext": false,
+    "errorPath": "offline.html"
+  }
+}
